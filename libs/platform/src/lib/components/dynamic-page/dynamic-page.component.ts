@@ -30,6 +30,7 @@ import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageConfig } from './dynamic-page.config';
 import { DynamicPageService } from './dynamic-page.service';
+import { addClassNameToElement } from './utils';
 
 let dynamicPageId = 0;
 @Component({
@@ -365,8 +366,8 @@ export class DynamicPageComponent extends BaseComponent implements OnInit, After
         const tabList = this._elementRef.nativeElement.querySelector('.fd-tabs');
         if (tabList) {
             console.log('valid tabs eelement');
-            this._renderer.addClass(tabList, CLASS_NAME.dynamicPageTabs);
-            this._renderer.addClass(tabList, CLASS_NAME.dynamicPageTabsAddShadow);
+            this._addClassNameToCustomElement(tabList, CLASS_NAME.dynamicPageTabs);
+            this._addClassNameToCustomElement(tabList, CLASS_NAME.dynamicPageTabsAddShadow);
             if (this.size) {
                 this._setTabsSize(this.size, tabList);
             }
@@ -380,19 +381,22 @@ export class DynamicPageComponent extends BaseComponent implements OnInit, After
                     '.fd-dynamic-page__header-visibility-container'
                 );
                 if (pinCollapseShadowElement) {
-                    this._renderer.addClass(pinCollapseShadowElement, CLASS_NAME.dynamicPageHeaderPinCollapseNoShadow);
+                    this._addClassNameToCustomElement(
+                        pinCollapseShadowElement,
+                        CLASS_NAME.dynamicPageHeaderPinCollapseNoShadow
+                    );
                 }
             }
         }
     }
     _setContentBackgroundStyles(background: BACKGROUND_TYPE): any {
-        const hostElement = this._elementRef.nativeElement.querySelector('fd-dynamic-page__content');
+        const contentElement = this._elementRef.nativeElement.querySelector('fd-dynamic-page__content');
         switch (background) {
             case 'transparent':
-                this._renderer.addClass(hostElement, CLASS_NAME.dynamicPageContentTransparentBg);
+                this._addClassNameToCustomElement(contentElement, CLASS_NAME.dynamicPageContentTransparentBg);
                 break;
             case 'list':
-                this._renderer.addClass(hostElement, CLASS_NAME.dynamicPageContentListBg);
+                this._addClassNameToCustomElement(contentElement, CLASS_NAME.dynamicPageContentListBg);
                 break;
             case 'solid':
             default:
@@ -405,35 +409,35 @@ export class DynamicPageComponent extends BaseComponent implements OnInit, After
         const hostElement = this._elementRef.nativeElement.querySelector('.fd-dynamic-page__content');
         switch (sizeType) {
             case 'small':
-                this._renderer.addClass(hostElement, CLASS_NAME.dynamicPageContentAreaSmall);
+                this._addClassNameToCustomElement(hostElement, CLASS_NAME.dynamicPageContentAreaSmall);
                 break;
             case 'medium':
-                this._renderer.addClass(hostElement, CLASS_NAME.dynamicPageContentAreaMedium);
+                this._addClassNameToCustomElement(hostElement, CLASS_NAME.dynamicPageContentAreaMedium);
                 break;
             case 'large':
-                this._renderer.addClass(hostElement, CLASS_NAME.dynamicPageContentAreaLarge);
+                this._addClassNameToCustomElement(hostElement, CLASS_NAME.dynamicPageContentAreaLarge);
                 break;
             case 'extra-large':
             default:
-                this._renderer.addClass(hostElement, CLASS_NAME.dynamicPageContentAreaExtraLarge);
+                this._addClassNameToCustomElement(hostElement, CLASS_NAME.dynamicPageContentAreaExtraLarge);
                 break;
         }
     }
     _setTabsSize(sizeType: RESPONSIVE_SIZE, element: Element): any {
         switch (sizeType) {
             case 'small':
-                this._renderer.addClass(element, CLASS_NAME.dynamicPageTabsSmall);
+                this._addClassNameToCustomElement(element, CLASS_NAME.dynamicPageTabsSmall);
                 break;
             case 'medium':
-                this._renderer.addClass(element, CLASS_NAME.dynamicPageTabsMedium);
+                this._addClassNameToCustomElement(element, CLASS_NAME.dynamicPageTabsMedium);
 
                 break;
             case 'large':
-                this._renderer.addClass(element, CLASS_NAME.dynamicPageTabsLarge);
+                this._addClassNameToCustomElement(element, CLASS_NAME.dynamicPageTabsLarge);
                 break;
             case 'extra-large':
             default:
-                this._renderer.addClass(element, CLASS_NAME.dynamicPageTabsExtraLarge);
+                this._addClassNameToCustomElement(element, CLASS_NAME.dynamicPageTabsExtraLarge);
                 break;
         }
     }
@@ -448,32 +452,47 @@ export class DynamicPageComponent extends BaseComponent implements OnInit, After
             switch (property) {
                 case 'transparent':
                     if (element) {
-                        this._addClassNameToElement(CLASS_NAME.dynamicPageContentTransparentBg, element);
+                        this._addClassNameToCustomElement(
+                            element.nativeElement,
+                            CLASS_NAME.dynamicPageContentTransparentBg
+                        );
                     }
                     break;
                 case 'list':
                     if (element) {
-                        this._addClassNameToElement(CLASS_NAME.dynamicPageContentListBg, element);
+                        this._addClassNameToCustomElement(element.nativeElement, CLASS_NAME.dynamicPageContentListBg);
                     }
                     break;
                 case 'small':
                     if (element) {
-                        this._addClassNameToElement(CLASS_NAME.dynamicPageContentAreaSmall, element);
+                        this._addClassNameToCustomElement(
+                            element.nativeElement,
+                            CLASS_NAME.dynamicPageContentAreaSmall
+                        );
                     }
                     break;
                 case 'medium':
                     if (element) {
-                        this._addClassNameToElement(CLASS_NAME.dynamicPageContentAreaMedium, element);
+                        this._addClassNameToCustomElement(
+                            element.nativeElement,
+                            CLASS_NAME.dynamicPageContentAreaMedium
+                        );
                     }
                     break;
                 case 'large':
                     if (element) {
-                        this._addClassNameToElement(CLASS_NAME.dynamicPageContentAreaLarge, element);
+                        this._addClassNameToCustomElement(
+                            element.nativeElement,
+                            CLASS_NAME.dynamicPageContentAreaLarge
+                        );
                     }
                     break;
                 case 'extra-large':
                     if (element) {
-                        this._addClassNameToElement(CLASS_NAME.dynamicPageContentAreaExtraLarge, element);
+                        this._addClassNameToCustomElement(
+                            element.nativeElement,
+                            CLASS_NAME.dynamicPageContentAreaExtraLarge
+                        );
                     }
                     break;
             }
@@ -525,17 +544,11 @@ export class DynamicPageComponent extends BaseComponent implements OnInit, After
 
     /**@hidden */
     private _addClassNameToHostElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
+        addClassNameToElement(this._renderer, this._elementRef.nativeElement, className);
     }
+
     /**@hidden */
-    private _addClassNameToTabElement(className: string): void {
-        this._renderer.addClass(this._elementRef.nativeElement, className);
-    }
-    /**@hidden */
-    private _removeClassNameToHostElement(className: string): void {
-        this._renderer.removeClass(this._elementRef.nativeElement, className);
-    }
-    private _addClassNameToElement(className: string, element: ElementRef<HTMLElement>): void {
-        this._renderer.addClass(element.nativeElement, className);
+    private _addClassNameToCustomElement(element: Element, className: string): void {
+        addClassNameToElement(this._renderer, element, className);
     }
 }
