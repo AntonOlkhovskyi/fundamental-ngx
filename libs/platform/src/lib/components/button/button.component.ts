@@ -12,7 +12,6 @@ export type ButtonType =
     | 'emphasized'
     | 'menu';
 
-export type GlyphPosition = 'before' | 'after';
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
@@ -22,7 +21,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
 
     /** Position of glyph related to text */
     @Input()
-    public glyphPosition: GlyphPosition = 'before';
+    public glyphPosition = 'before';
 
     /**
     * Text rendered inside button component
