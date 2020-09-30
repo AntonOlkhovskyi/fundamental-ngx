@@ -14,7 +14,6 @@ import {
 } from '@angular/core';
 import { BACKGROUND_TYPE, CLASS_NAME, RESPONSIVE_SIZE } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
-import { BreadcrumbComponent } from '@fundamental-ngx/core';
 import { addClassNameToElement, removeClassNameFromElement } from '../../utils';
 
 @Component({
@@ -56,15 +55,6 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         return this._size;
     }
 
-    /** @hidden */
-    constructor(
-        private _elementRef: ElementRef<HTMLElement>,
-        private _renderer: Renderer2,
-        public focusMonitor: FocusMonitor,
-        private _dynamicPageService: DynamicPageService,
-        private _ngZone: NgZone
-    ) {}
-
     @Input()
     title: string;
 
@@ -80,6 +70,14 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
      * tracks the size for responsive padding
      */
     _size: RESPONSIVE_SIZE;
+    /** @hidden */
+    constructor(
+        private _elementRef: ElementRef<HTMLElement>,
+        private _renderer: Renderer2,
+        public focusMonitor: FocusMonitor,
+        private _dynamicPageService: DynamicPageService,
+        private _ngZone: NgZone
+    ) {}
 
     ngAfterViewInit(): void {
         this.focusMonitor.monitor(this._elementRef).subscribe((origin) =>
@@ -118,6 +116,10 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         }
     }
 
+    /**
+     * sets the style classes for background property
+     * @param background
+     */
     _setBackgroundStyles(background: BACKGROUND_TYPE): any {
         switch (background) {
             case 'transparent':
@@ -135,6 +137,10 @@ export class DynamicPageTitleComponent implements OnInit, AfterViewInit {
         }
     }
 
+    /**
+     * sets the padding classes
+     * @param sizeType
+     */
     _setSize(sizeType: RESPONSIVE_SIZE): any {
         switch (sizeType) {
             case 'small':
