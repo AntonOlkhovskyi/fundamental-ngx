@@ -13,7 +13,6 @@ export const CLASS_NAME = {
     dynamicPageTitle: 'fd-dynamic-page__title',
     dynamicPageBreadcrumb: 'fd-dynamic-page__breadcrumb',
     dynamicPageKeyInfo: 'fd-dynamic-page__title-content',
-    // dynamicPageSubtitle: 'fd-dynamic-page__header',
     dynamicPageGlobalActions: 'fd-dynamic-page__toolbar',
     dynamicPageLayoutActions: 'fd-dynamic-page__toolbar--actions',
     dynamicPageHeader: 'fd-dynamic-page__header',
