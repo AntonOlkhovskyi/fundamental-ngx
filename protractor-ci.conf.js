@@ -62,7 +62,6 @@ exports.config = {
             'name': 'e2e-MAC-safari',
         },
     ],
-    directConnect: false,
     baseUrl: 'http://localhost:4200/#',
     framework: 'jasmine',
     jasmineNodeOpts: {
