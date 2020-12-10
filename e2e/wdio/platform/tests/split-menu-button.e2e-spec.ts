@@ -13,7 +13,7 @@ describe('Split menu button test suite', () => {
         webDriver.refreshPage();
     });
 
-    it('should check drop-down arrow menu functionality', () => {
+    it('should check drop-down arrow menu functionality', async () => {
         const dropdownArrowBtnArr = webDriver.elementArray(spMenuBtnPage.arrowBtnArr);
 
         for (let i = 0; i < dropdownArrowBtnArr.length; i++) {
@@ -24,7 +24,7 @@ describe('Split menu button test suite', () => {
 
     });
 
-    it('should check each split btn has main and arrow btns', () => {
+    it('should check each split btn has main and arrow btns', async () => {
         const dropdownArrowBtnCount = webDriver.getElementArrayLength(spMenuBtnPage.arrowBtnArr);
         const mainBtnCount = webDriver.getElementArrayLength(spMenuBtnPage.mainBtnArr);
 
@@ -79,38 +79,38 @@ describe('Split menu button test suite', () => {
 
         for (let i = 0; i < behaviorBtnArr.length; i++) {
             webDriver.scrollIntoView(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
-            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr, i);
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.defaultHvrColor);
         }
 
         for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
             webDriver.scrollIntoView(spMenuBtnPage.behaviorsExArrowBtnArr, i);
-            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr, i);
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.defaultHvrColor);
         }
     });
 
     xit('should check default active state', () => {
-        // const behaviorBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
-        // const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
-        //
-        // for (let i = 0; i < behaviorBtnArr.length; i++) {
-        //     webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
-        //     webDriver.mouseButtonDown();
-        //     expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
-        //         .toContain(SMBData.defaultBtnColor);
-        //     webDriver.mouseButtonUp();
-        // }
-        //
-        // for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
-        //     webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
-        //     webDriver.mouseButtonDown();
-        //     expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
-        //         .toContain(SMBData.defaultBtnColor);
-        //     webDriver.mouseButtonUp();
-        // }
+        const behaviorBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExSelectionBtnArr);
+        const behaviorArrowBtnArr = webDriver.elementArray(spMenuBtnPage.behaviorsExArrowBtnArr);
+
+        for (let i = 0; i < behaviorBtnArr.length; i++) {
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExSelectionBtnArr,  i);
+            webDriver.mouseButtonDown();
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.defaultBtnColor);
+            webDriver.mouseButtonUp();
+        }
+
+        for (let i = 0; i < behaviorArrowBtnArr.length; i++) {
+            webDriver.mouseHoverElement(spMenuBtnPage.behaviorsExArrowBtnArr,  i);
+            webDriver.mouseButtonDown();
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.behaviorsExArrowBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.defaultBtnColor);
+            webDriver.mouseButtonUp();
+        }
     });
 
     it('should check split btn types example colors', () => {
@@ -128,48 +128,48 @@ describe('Split menu button test suite', () => {
         }
     });
 
-    it('should check split btn type examples hover colors', () => {
+    it('should check split btn type examples hover colors', async () => {
         const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
         const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
 
         for (let i = 0; i < typesBtnArr.length; i++) {
             webDriver.scrollIntoView(spMenuBtnPage.typesExSelectionBtnArr, i);
-            webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr, i);
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.typesBtnHvrColorArr[i]);
         }
 
         for (let i = 0; i < typesArrowBtnArr.length; i++) {
             webDriver.scrollIntoView(spMenuBtnPage.typesExArrowBtnArr, i);
-            webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr, i);
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr,  i);
             expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
                 .toContain(SMBData.typesBtnHvrColorArr[i]);
         }
     });
 
-    xit('should check split btn type examples active state', () => {
-        // const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
-        // const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
-        //
-        // for (let i = 0; i < typesBtnArr.length; i++) {
-        //     webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
-        //     webDriver.mouseButtonDown();
-        //     expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
-        //         .toContain(SMBData.typesBtnActiveColorArr[i]);
-        //     webDriver.mouseButtonUp();
-        // }
-        //
-        // for (let i = 0; i < typesArrowBtnArr.length; i++) {
-        //     webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr,  i);
-        //     webDriver.mouseButtonDown();
-        //     expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
-        //         .toContain(SMBData.typesBtnActiveColorArr[i]);
-        //     webDriver.mouseButtonUp();
-        // }
+    xit('should check split btn type examples active state', async () => {
+        const typesBtnArr = webDriver.elementArray(spMenuBtnPage.typesExSelectionBtnArr);
+        const typesArrowBtnArr = webDriver.elementArray(spMenuBtnPage.typesExArrowBtnArr);
+
+        for (let i = 0; i < typesBtnArr.length; i++) {
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExSelectionBtnArr,  i);
+            webDriver.mouseButtonDown();
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExSelectionBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.typesBtnActiveColorArr[i]);
+            webDriver.mouseButtonUp();
+        }
+
+        for (let i = 0; i < typesArrowBtnArr.length; i++) {
+            webDriver.mouseHoverElement(spMenuBtnPage.typesExArrowBtnArr,  i);
+            webDriver.mouseButtonDown();
+            expect(webDriver.getCSSPropertyByName(spMenuBtnPage.typesExArrowBtnArr, SMBData.bgColorAttr, i).value)
+                .toContain(SMBData.typesBtnActiveColorArr[i]);
+            webDriver.mouseButtonUp();
+        }
 
     });
 
-    it('should check tooltips', () => {
+    it('should check tooltips', async () => {
         const menuBtnArr = webDriver.elementArray(spMenuBtnPage.mainBtnArr);
 
         for (let i = 0; i < menuBtnArr.length; i++) {
@@ -178,6 +178,8 @@ describe('Split menu button test suite', () => {
         }
     });
 
+    it('should check RTL orientation', async () => {
+        spMenuBtnPage.checkRtlSwitch();
     it('should check RTL orientation', () => {
         spMenuBtnPage.checkRtlSwitch(spMenuBtnPage.rtlSwitcherArr, spMenuBtnPage.exampleAreaContainersArr);
     });

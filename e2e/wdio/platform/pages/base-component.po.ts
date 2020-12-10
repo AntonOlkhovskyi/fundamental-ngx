@@ -1,17 +1,21 @@
 import { webDriver } from '../../driver/wdio';
-import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
+import { AssertionHelper } from '../../helper/assertion-helper';
+const assertionHelper = new AssertionHelper();
 
 export class BaseComponentPo {
 
     title = 'header .header';
 
-    checkRtlSwitch(switchers: string, areas: string): void {
-        const areasArray = webDriver.elementArray(areas);
+    exampleAreaContainersArr = '.fd-doc-component';
+    rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
+
+    checkRtlSwitch(): void {
+        const areasArray = webDriver.elementArray(this.exampleAreaContainersArr);
         for (let i = 0; i < areasArray.length; i++) {
-            webDriver.click(switchers, i);
-            checkRtlOrientation(areas, i);
-            webDriver.click(switchers, i);
-            checkLtrOrientation(areas, i);
+            webDriver.click(this.rtlSwitcherArr, i);
+            assertionHelper.checkRtlOrientation(this.exampleAreaContainersArr, i);
+            webDriver.click(this.rtlSwitcherArr, i);
+            assertionHelper.checkLtrOrientation(this.exampleAreaContainersArr, i);
         }
     }
 
