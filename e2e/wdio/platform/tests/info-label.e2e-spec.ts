@@ -8,7 +8,6 @@ import {
     getText,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { experimental } from '@angular-devkit/core';
 
 describe('Info Label component test suite', () => {
     const {
